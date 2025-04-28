@@ -34,7 +34,7 @@ CREATE TABLE marcas(
 
 )ENGINE = INNODB;
 
-INSERT INTO marca (nom_marca)values
+INSERT INTO marcas (nom_marca)values
 ('Samsung'),
 ('Xiaomi'),
 ('Huawei');
@@ -66,7 +66,6 @@ CREATE TABLE producto(
     FOREIGN KEY (id_marca) REFERENCES marcas(id_marca)
 
 )ENGINE =INNODB;
-
 
 
 INSERT INTO producto (nom_producto, modelo_producto, descripcion_producto, memoria_gb, ram_gb, procesador, precio_producto, cantidad_producto, image_producto, id_marca,id_categoria) VALUES
