@@ -68,7 +68,7 @@ CREATE TABLE producto(
 )ENGINE =INNODB;
 
 
-INSERT INTO producto (nom_producto, modelo_producto, descripcion_producto, memoria_gb, ram_gb, procesador, precio_producto, cantidad_producto, image_producto, id_marca,id_categoria) VALUES
+INSERT INTO producto (nom_producto, modelo_producto, descripcion_producto, memoria_gb, ram_gb, procesador, precio_producto, cantidad_producto, image_producto,id_categoria, id_marca) VALUES
 ('Galaxy S23', 'SM-G980F', 'Smartphone de gama alta con cámara de 108MP', 128, 8, 'Exynos 2100', 999.99, 50, 'galaxy_s23.jpg', 'Samsung',1),
 ('Xiaomi Mi 11', 'M2011K2C', 'Smartphone con pantalla AMOLED 120Hz', 128, 8, 'Snapdragon 888', 749.99, 100, 'xiaomi_mi11.jpg', 'Xiaomi',1),
 ('Huawei P40 Pro', 'ELS-NX9', 'Smartphone con cámara Leica de 50MP', 256, 8, 'Kirin 990', 899.99, 30, 'huawei_p40pro.jpg', 'Huawei',1),
@@ -77,15 +77,17 @@ INSERT INTO producto (nom_producto, modelo_producto, descripcion_producto, memor
 ('Huawei Mate 40 Pro', 'NOH-NX9', 'Smartphone premium con cámara de 50MP y 5G', 256, 8, 'Kirin 9000', 1199.99, 25, 'huawei_mate40pro.jpg', 'Huawei',1);
 SELECT * FROM producto;
 
+
 CREATE TABLE categoria(
 
 	id_categoria			          INT AUTO_INCREMENT PRIMARY KEY,
-  nom_categoria			          VARCHAR(20) NOT NULL
+	nom_categoria			          VARCHAR(20) NOT NULL
 	
 )ENGINE = INNODB;
 
 
 INSERT INTO categoria(nom_categoria)VALUES
 ('Smartphone'),
-('Tablet'),
+('Tablet');
 SELECT * FROM categoria;
+
