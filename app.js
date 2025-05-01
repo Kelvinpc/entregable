@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 
-const rutaTienda = require('./routes/rutaTienda');
+const rutaTienda = require('./routes/producto');
 
 
 const app = express();

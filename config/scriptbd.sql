@@ -29,8 +29,8 @@ USE tiendaOnline;
 
 CREATE TABLE marcas(
 
-	id_marca		INT AUTO_INCREMENT PRIMARY KEY,
-  nom_marca		VARCHAR(30) NOT NULL
+	idmarca		INT AUTO_INCREMENT PRIMARY KEY,
+  nommarca		VARCHAR(30) NOT NULL
 
 )ENGINE = INNODB;
 
@@ -41,29 +41,42 @@ INSERT INTO marcas (nom_marca)values
 SELECT * FROM marcas;
 
 
+CREATE TABLE categoria(
+
+	idcategoria			          INT AUTO_INCREMENT PRIMARY KEY,
+	nomcategoria			          VARCHAR(20) NOT NULL
+	
+)ENGINE = INNODB;
+
+
+INSERT INTO categoria(nomcategoria)VALUES
+('Smartphone'),
+('Tablet');
+SELECT * FROM categoria;
+
 
 
 CREATE TABLE producto(
 
-	id_producto				          INT AUTO_INCREMENT PRIMARY KEY,
-    nom_producto			        VARCHAR(50) NOT NULL,
-    modelo_producto			      VARCHAR(30) NOT NULL,
-    descripcion_producto	    VARCHAR(255) NOT NULL,
+	  idproducto				        INT AUTO_INCREMENT PRIMARY KEY,
+    nomproducto			        VARCHAR(50) NOT NULL,
+    modeloproducto			      VARCHAR(30) NOT NULL,
+    descripcionproducto	    VARCHAR(255) NOT NULL,
 
-    memoria_gb				        INT NOT NULL,
-    ram_gb					          INT NOT NULL,
+    memoriagb				        INT NOT NULL,
+    ramgb					          INT NOT NULL,
     procesador				        VARCHAR(30),
 
-    precio_producto			      DECIMAL(5.2) NOT NULL,
-    cantidad_producto		      INT NOT NULL,
-    image_producto			      VARCHAR(255) NOT NULL,
-    disponibilidad_producto	  BOOLEAN DEFAULT TRUE,
+    precioproducto			      DECIMAL(5.2) NOT NULL,
+    cantidadproducto		      INT NOT NULL,
+    imageproducto			      VARCHAR(255) NOT NULL,
+    disponibilidadproducto	  BOOLEAN DEFAULT TRUE,
 
-    id_categoria              INT NOT NULL,
-    id_marca				          INT NOT NULL,
+    idcategoria              INT NOT NULL,
+    idmarca				          INT NOT NULL,
 
 
-    FOREIGN KEY (id_marca) REFERENCES marcas(id_marca)
+    FOREIGN KEY (idmarca) REFERENCES marcas(idmarca)
 
 )ENGINE =INNODB;
 
@@ -78,16 +91,4 @@ INSERT INTO producto (nom_producto, modelo_producto, descripcion_producto, memor
 SELECT * FROM producto;
 
 
-CREATE TABLE categoria(
-
-	id_categoria			          INT AUTO_INCREMENT PRIMARY KEY,
-	nom_categoria			          VARCHAR(20) NOT NULL
-	
-)ENGINE = INNODB;
-
-
-INSERT INTO categoria(nom_categoria)VALUES
-('Smartphone'),
-('Tablet');
-SELECT * FROM categoria;
 
