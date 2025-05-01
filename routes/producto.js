@@ -18,16 +18,17 @@ router.get('/', async (req, res) => {
             P.imageproducto,
             P.disponibilidadproducto,
             C.nomcategoria
-        FROM producto P
-            INNER JOIN marca M 
-            INNER JOIN categoria C 
-            ON P.idmarca = M.idmarca
-            ON P.idmarca = C.idcategoria`
+            FROM producto P
+            INNER JOIN marcas M ON P.idmarca = M.idmarca
+            INNER JOIN categoria C ON P.idcategoria = C.idcategoria
+        `;
 
         const [producto] = await db.query(query)
-        res.render('index', {producto})
+        res.render('catalogo', {producto})
     }catch(error){
         console.error(error)
 
     }
 })
+
+module.exports=router
