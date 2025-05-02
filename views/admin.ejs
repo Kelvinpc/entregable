@@ -8,6 +8,10 @@
 </head>
 <body>
 
+    <div class="container mt-4 mb-4">
+        <a class="btn btn-sm btn-info" href="/create">Registro vehículo</a>
+    </div>
+
 
     <div class="table-resposibe">
         <table class="table table-sm">
@@ -23,7 +27,7 @@
                     <th>Procesador</th>
                     <th>Precio</th>
                     <th>Cantidad</th>
-                    <th>Imagen</th>
+                    <!-- <th>Imagen</th> -->
                     <th>Estado</th>
                     <th>Categoria</th>
                     <th>Operaciones</th>
@@ -35,7 +39,6 @@
                         <td><%= producto.idproducto %></td>
                         <td><%= producto.nommarca %></td>
                         <td><%= producto.nomproducto %></td>
-
                         <td><%= producto.modeloproducto %></td>
                         <td><%= producto.descripcionproducto %></td>
                         <td><%= producto.memoriagb %></td>
@@ -43,7 +46,8 @@
                         <td><%= producto.procesador %></td>
                         <td><%= producto.precioproducto %></td>
                         <td><%= producto.cantidadproducto %></td>
-                        <td><%= producto.imageproducto %></td>
+                        <!-- <img src="/images/<%= producto.imageproducto %>" alt="<%= producto.nomproducto %>" width="100"> -->
+
                         <td><%= producto.disponibilidadproducto %></td>
                         <td><%= producto.nomcategoria %></td>
                         <td>

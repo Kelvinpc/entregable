@@ -22,6 +22,8 @@ router.get('/admin', async (req, res) => {
             P.cantidadproducto,
             P.imageproducto,
             P.disponibilidadproducto,
+            P.color,
+
             C.nomcategoria,
             P.idmarca,
             P.idcategoria
@@ -31,7 +33,7 @@ router.get('/admin', async (req, res) => {
         `;
 
         const [producto] = await db.query(query)
-        res.render('catalogo', {producto})
+        res.render('admin', {producto})
     }catch(error){
         console.error(error)
 
@@ -55,6 +57,8 @@ router.get('/catalogo', async (req, res) => {
             P.cantidadproducto,
             P.imageproducto,
             P.disponibilidadproducto,
+            P.color,
+
             C.nomcategoria,
             P.idmarca,
             P.idcategoria
@@ -70,5 +74,34 @@ router.get('/catalogo', async (req, res) => {
 
     }
 })
+
+
+router.get('/create', async(req,res) => {
+    try{
+        const [categoria] = await db.query('SELECT * FROM categoria');
+        const [marcas] = await db.query('SELECT * FROM marcas');
+        res.render('create', { categoria: categoria, marcas: marcas });
+
+    }catch(error){
+        console.error(error)
+    }
+})
+
+
+router.post('/create',async(req,res) =>{
+    try{
+        const{nomproducto, modeloproducto, descripcionproducto, memoriagb, ramgb, procesador, precioproducto, cantidadproducto, imageproducto,color,idcategoria, idmarca} = req.body
+        await db.query(`INSERT INTO producto (nomproducto, modeloproducto, descripcionproducto, memoriagb, ramgb, procesador, precioproducto, cantidadproducto, imageproducto,color,idcategoria, idmarca) 
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`,[nomproducto, modeloproducto, descripcionproducto, memoriagb, ramgb, procesador, precioproducto, cantidadproducto, imageproducto,color,idcategoria, idmarca])
+        res.redirect('/')
+    }catch(error){
+        console.error(error)
+    }
+})
+
+
+
+
+
 
 module.exports=router

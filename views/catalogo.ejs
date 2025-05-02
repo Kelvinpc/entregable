@@ -8,60 +8,45 @@
 </head>
 <body>
 
-<h1>bienvenido a la vista de usuarios</h1>
-    <!-- <div class="table-resposibe">
-        <table class="table table-sm">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Marca</th>
-                    <th>Nombre</th>
-                    <th>Modelo</th>
-                    <th>Descripcion</th>
-                    <th>Almacenamiento</th>
-                    <th>RAM</th>
-                    <th>Procesador</th>
-                    <th>Precio</th>
-                    <th>Cantidad</th>
-                    <th>Imagen</th>
-                    <th>Estado</th>
-                    <th>Categoria</th>
-                    <th>Operaciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% producto.forEach(producto => { %>
-                    <tr>
-                        <td><%= producto.idproducto %></td>
-                        <td><%= producto.nommarca %></td>
-                        <td><%= producto.nomproducto %></td>
+<div class="container mt-5 ">
+    <h1>bienvenido a la vista de usuarios</h1>
 
-                        <td><%= producto.modeloproducto %></td>
-                        <td><%= producto.descripcionproducto %></td>
-                        <td><%= producto.memoriagb %></td>
-                        <td><%= producto.ramgb %></td>
-                        <td><%= producto.procesador %></td>
-                        <td><%= producto.precioproducto %></td>
-                        <td><%= producto.cantidadproducto %></td>
-                        <td><%= producto.imageproducto %></td>
-                        <td><%= producto.disponibilidadproducto %></td>
-                        <td><%= producto.nomcategoria %></td>
-                        <td>
-                            <a href="/edit/" class="btn btn-sm btn-info">Editar</a>
-                            <a href="/delete/" class="btn btn-sm btn-danger delete">Eliminar</a>
-                        </td> 
-
-                    </tr>
-                <%}) %>
-
-            </tbody>
-
-        </table>
-
-    </div> -->
-
-
+  
     
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <% producto.forEach(producto => { %>
+
+
+            <div class="col">
+                <div class="card">
+                  <img src="/images/<%= producto.imageproducto %>" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title"><b><%= producto.nomproducto %></b></h5>
+                    <p class="card-text"><%= producto.descripcionproducto %></p>
+                    <p class="card-text"><%= producto.memoriagb %> de almacenamiento interno</p>
+                    <p class="card-text"><%= producto.ramgb %> GB de RAM</p>
+                    <p class="card-text">En color <%= producto.color %></p>
+                    <p class="card-text">Por S/. <%= producto.precioproducto %></p>
+
+                    <a href="#" class="btn btn-primary">Comprar</a>
+
+                  </div>
+                </div>
+              </div>
+
+        <%}) %>
+
+
+
+      </div>
+
+
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+
 </body>
 
 <script></script>
