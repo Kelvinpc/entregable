@@ -1,0 +1,194 @@
+<%- include('partials/header') %>
+
+    <form action="/edit/<%= producto.idproducto %>"  id="formulario-registro" method="post" autocomplete="off">
+
+        <div class="card mt-2">
+
+            <div class="card-header"><strong>Actualizacion</strong></div>
+            
+            <div class="card-body">
+
+                <div class="row g-2">
+                    <div class="col md-4 mb-2">
+                        <div class="form-floating">
+                            <select name="idmarca" id="idmarca" class="form-select">
+                                <option value="" selected disabled>Seleccionar</option>
+
+                                <%marcas.forEach(marcas => { %>
+                                <option value="<%= marcas.idmarca %>" <%= marcas.idmarca == producto.idmarca ? 'selected':'' %>  ><%= marcas.nommarca %></option>
+
+
+                                <%})%>
+                            </select>
+                            <label for="form-label">Marcas</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-2">
+                       <div class="form-floating">
+                        <input type="text" name="modeloproducto" value="<%= producto.modeloproducto %>" id="modeloproducto" class="form-control" placeholder="Modelo">
+                        <label for="form-label">Modelo</label>
+                       </div> 
+                    </div>
+
+                    <div class="col-md-4 mb-2">
+                        <div class="form-floating">
+                         <input type="text" name="nomproducto"  value="<%= producto.nomproducto %>" id="nomproducto" class="form-control" placeholder="Nombre del producto">
+                         <label for="form-label">Nombre del producto</label>
+                        </div> 
+                     </div>
+
+                    <div class="row g-2">
+                        <div class="col-md-4 mb-2">
+                            <div class="form-floating">
+                                <input type="text" value="<%= producto.color %>"  name="color" id="color" class="form-control" placeholder="Color">
+                                <label for="form-label">Color</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-2">
+                            <div class="form-floating">
+                                <select name="idcategoria" id="idcategoria" class="form-select">
+                                    <option value="" selected disabled>Seleccionar</option>
+    
+                                    <%categoria.forEach(categoria => { %>
+
+                                    <option value="<%= categoria.idcategoria %>" <%= categoria.idcategoria == producto.idcategoria ? 'selected':'' %>  ><%= categoria.nomcategoria %></option>
+
+
+    
+                                    <%})%>
+                                </select>
+                                <label for="form-label">Categorias</label>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-2">
+
+                            <div class="form-floating">
+                                <input type="number" value="<%= producto.memoriagb %>"  name="memoriagb" id="memoriagb" class="form-control" placeholder="Almacenamiento">
+                                <label for="form-label">Almacenamiento</label>
+                            </div>
+
+                        </div>
+
+                       
+
+                    </div>
+
+
+                    <div class="row g-2">
+
+                        <div class="col-md-4 mb-2">
+
+                            <div class="form-floating">
+                                <input type="number" value="<%= producto.ramgb %>"  name="ramgb" id="ramgb" class="form-control" placeholder="Cantidad de RAM">
+                                <label for="form-label">Cantidad de RAM</label>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4 mb-2">
+
+                            <div class="form-floating">
+                                <input type="text"  value="<%= producto.procesador %>" name="procesador" id="procesador" class="form-control" placeholder="Procesador">
+                                <label for="form-label">Procesador</label>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4 mb-2">
+
+                            <div class="form-floating">
+                                <input type="number" value="<%= producto.precioproducto %>"  name="precioproducto" id="precioproducto" class="form-control" placeholder="Precio">
+                                <label for="form-label">Precio</label>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row g-2">
+
+                        <div class="col-md-6 mb-2">
+
+                            <div class="form-floating">
+                                <input type="number" value="<%= producto.cantidadproducto %>"  name="cantidadproducto" id="cantidadproducto" class="form-control" placeholder="Cantidad del producto">
+                                <label for="form-label">Cantidad del producto</label>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6 mb-2">
+
+                            <div class="form-floating">
+                                <input type="file" value="<%= producto.imageproducto %>"  name="imageproducto" id="imageproducto" class="form-control" placeholder="Procesador">
+                                <label for="form-label">Imagen</label>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+
+                    <div class="row g-2">
+
+                        <div class="col-md-12 mb-2">
+
+                            <div class="form-floating">
+                                <input type="text"  value="<%= producto.descripcionproducto %>"  name="descripcionproducto" id="descripcionproducto" class="form-control" placeholder="Descripcion">
+                                <label for="form-label">Descripcion</label>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-sm btn-primary">Guardar</button>
+                <a href="/" class="btn btn-sm btn-secondary">Cancelar</a>
+              </div>
+
+        </div>
+
+
+    </form>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const formulario = document.querySelector("#formulario-registro")
+      
+          formulario.addEventListener("submit", (event) => {
+            event.preventDefault()
+      
+            Swal.fire({
+              title: 'Productos',
+              text: '¿Está seguro de actualizar?',
+              icon: 'question',
+              footer: 'SENATI - Ingeniería Software',
+              confirmButtonText: 'Aceptar',
+              confirmButtonColor: '#2980b9',
+              showCancelButton: true,
+              cancelButtonText: 'Cancelar',
+              cancelButtonColor: '#c0392b'
+            }).then((result) => {
+              if (result.isConfirmed){
+                formulario.submit()
+              }
+            })
+      
+          })
+        })
+      </script>
+<%- include('partials/footer') %>

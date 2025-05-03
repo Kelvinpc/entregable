@@ -23,13 +23,13 @@ router.get('/admin', async (req, res) => {
             P.imageproducto,
             P.disponibilidadproducto,
             P.color,
-
             C.nomcategoria,
             P.idmarca,
             P.idcategoria
             FROM producto P
             INNER JOIN marcas M ON P.idmarca = M.idmarca
             INNER JOIN categoria C ON P.idcategoria = C.idcategoria
+            WHERE disponibilidadproducto != 0
         `;
 
         const [producto] = await db.query(query)
@@ -62,9 +62,10 @@ router.get('/catalogo', async (req, res) => {
             C.nomcategoria,
             P.idmarca,
             P.idcategoria
-            FROM producto P
+            FROM producto P  
             INNER JOIN marcas M ON P.idmarca = M.idmarca
-            INNER JOIN categoria C ON P.idcategoria = C.idcategoria
+            INNER JOIN categoria C ON P.idcategoria = C.idcategoria 
+            WHERE disponibilidadproducto != 0
         `;
 
         const [producto] = await db.query(query)
@@ -78,7 +79,7 @@ router.get('/catalogo', async (req, res) => {
 
 router.get('/create', async(req,res) => {
     try{
-        const [categoria] = await db.query('SELECT * FROM categoria');
+        const [categoria] = await db.query('SELECT * FROM categoria ');
         const [marcas] = await db.query('SELECT * FROM marcas');
         res.render('create', { categoria: categoria, marcas: marcas });
 
@@ -94,6 +95,53 @@ router.post('/create',async(req,res) =>{
         await db.query(`INSERT INTO producto (nomproducto, modeloproducto, descripcionproducto, memoriagb, ramgb, procesador, precioproducto, cantidadproducto, imageproducto,color,idcategoria, idmarca) 
             VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`,[nomproducto, modeloproducto, descripcionproducto, memoriagb, ramgb, procesador, precioproducto, cantidadproducto, imageproducto,color,idcategoria, idmarca])
         res.redirect('/')
+    }catch(error){
+        console.error(error)
+    }
+})
+
+
+
+router.get('/edit/:id', async(req,res)=>{
+    try{
+        const[datosMarcas] =await db.query("SELECT * FROM marcas")
+        const[datosCategoria] =await db.query("SELECT * FROM categoria")
+
+        const[registro] = await db.query("SELECT * FROM producto WHERE idproducto = ?",[req.params.id])
+
+        if (registro.length>0) {
+            res.render('edit',{marcas:datosMarcas, categoria:datosCategoria,producto:registro[0]})
+        }else{
+            res.redirect('/')
+        }
+    }catch(error){
+        console.error(error);
+        
+    }
+})
+
+router.post('/edit/:id',async(req,res) =>{
+    try{
+
+        const{nomproducto, modeloproducto, descripcionproducto, memoriagb, ramgb, procesador, precioproducto, cantidadproducto, imageproducto,color,idcategoria, idmarca} = req.body
+        await db.query(`UPDATE producto SET nomproducto=?, modeloproducto=?, descripcionproducto=?, memoriagb=?, ramgb=?, procesador=?, precioproducto=?, cantidadproducto=?, imageproducto=?,color=?,idcategoria=?, idmarca=? WHERE idproducto= ?`,
+            [nomproducto, modeloproducto, descripcionproducto, memoriagb, ramgb, procesador, precioproducto, cantidadproducto, imageproducto,color,idcategoria, idmarca, req.params.id])
+
+        res.redirect('/')
+    }catch(error){
+        console.error(error)
+    }
+})
+
+
+
+
+
+router.get('/delete/:id', async(req,res) =>{
+    try{
+
+        const resultado = await db.query("DELETE FROM producto WHERE idproducto = ?", [req.params.id])
+        res.redirect('/admin')
     }catch(error){
         console.error(error)
     }

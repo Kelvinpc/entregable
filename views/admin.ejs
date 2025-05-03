@@ -46,13 +46,13 @@
                         <td><%= producto.procesador %></td>
                         <td><%= producto.precioproducto %></td>
                         <td><%= producto.cantidadproducto %></td>
-                        <!-- <img src="/images/<%= producto.imageproducto %>" alt="<%= producto.nomproducto %>" width="100"> -->
-
                         <td><%= producto.disponibilidadproducto %></td>
                         <td><%= producto.nomcategoria %></td>
                         <td>
-                            <a href="/edit/" class="btn btn-sm btn-info">Editar</a>
-                            <a href="/delete/" class="btn btn-sm btn-danger delete">Eliminar</a>
+                            <a href="/edit/<%= producto.idproducto %>" class="btn btn-sm btn-info">Editar</a>
+
+
+                            <a href="/delete/<%= producto.idproducto %>" class="btn btn-sm btn-danger delete">Eliminar</a>
                         </td> 
 
                     </tr>
@@ -68,5 +68,32 @@
     
 </body>
 
-<script></script>
-</html>
+
+<script>
+    document.addEventListener("DOMContentLoaded",()=>{
+      const enlacesEliminar=document.querySelectorAll(".delete");
+      enlacesEliminar.forEach((enlace) => {
+      enlace.addEventListener("click",(event)=>{
+        event.preventDefault();
+        Swal.fire({
+          title:'PRODUCTO',
+          text:'¿Está seguro de eliminar?',
+          icon:'question',
+          footer:'SENATI ING. SOFTWARE',
+          confirmButtonText:'Aceptar',
+          confirmButtonColor:'#2980b9',
+          showCancelButton:true,
+          cancelButtonText:'Cancelar'
+        }).then((result)=>{
+          if(result.isConfirmed){
+            window.location.href=event.target.getAttribute("href")
+          }
+        })//then()
+      })//addEventListener
+    })//forEach
+  });//DOMCDontentLoaded
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  </html>
