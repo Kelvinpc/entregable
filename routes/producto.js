@@ -58,7 +58,6 @@ router.get('/catalogo', async (req, res) => {
             P.imageproducto,
             P.disponibilidadproducto,
             P.color,
-
             C.nomcategoria,
             P.idmarca,
             P.idcategoria
